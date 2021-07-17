@@ -49,3 +49,8 @@ class ChecksumCalculator:
         '''
         hex_checksum = hex(self.xor())
         return hex_checksum[2:].zfill(2)
+
+
+class Message(ChecksumCalculator):
+    def __str__(self):
+        return f'${self.sentence}*{self.checksum}'
