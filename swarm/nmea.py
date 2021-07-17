@@ -19,7 +19,7 @@ class ChecksumCalculator:
     @sentence.setter
     def sentence(self, value):
         if not value:
-            raise ValueError('Short message should specified not contain $')
+            raise ValueError('Short message should be specified')
         if '$' in value:
             raise ValueError('Short message should not contain $')
         self.__sentence = value
