@@ -2,14 +2,15 @@ import numpy
 
 
 class ChecksumCalculator:
-    '''Calculate checksum of NMEA message
-
-    @parameters:
-
-    value (str): the sentence to calculate the checksum for (text between $ and * in an NMEA message)
-    '''
+    '''Calculate checksum of NMEA message'''
 
     def __init__(self, sentence):
+        '''Constructor
+
+        @parameters:
+
+        value (str): the sentence to calculate the checksum for (text between $ and * in an NMEA message)
+        '''
         self.sentence = sentence
 
     @property
