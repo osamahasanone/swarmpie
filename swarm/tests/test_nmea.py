@@ -7,6 +7,7 @@ class TestChecksumCalculator:
     def test_falsy_sentence(self):
         with pytest.raises(ValueError):
             m = ChecksumCalculator(sentence=None)
+        with pytest.raises(ValueError):
             m = ChecksumCalculator(sentence="any$any")
 
     @pytest.fixture
