@@ -1,5 +1,3 @@
-'''contains important information about swarm command parameters'''
-
 # if a verb has (n) parameter, it should have list of (n) patterns
 _empty = []
 _standard = [r'^(\?|@|\d+)$']
@@ -21,3 +19,6 @@ verbs_params = {
     'SL': [r'^(S=\d+)|(U=[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2})$'],
     'TD': [r'^$|(HD=\d+)|(ET=\d+)$', r'^.*$']
 }
+
+_verbs_re_or = '|'.join(verbs_params.keys())
+response_pattern = fr'^\$({_verbs_re_or}) .*\*[0-9a-f][0-9a-f]$'

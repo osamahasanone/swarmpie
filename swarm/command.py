@@ -1,6 +1,6 @@
 import re
-from ..nmea import CommandMessage
-from .validation import verbs_params
+from .nmea import CommandMessage
+from .constatnts import verbs_params
 
 
 class Command:

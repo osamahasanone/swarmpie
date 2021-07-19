@@ -1,5 +1,5 @@
 import pytest
-from ..dataout.command import Command
+from ..command import Command
 
 
 class TestCommand:
