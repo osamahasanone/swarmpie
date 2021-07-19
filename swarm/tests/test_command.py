@@ -70,7 +70,7 @@ class TestCommand:
             c = Command(verb_str, [])
         with pytest.raises(ParametersCountError):
             c = Command(verb_str, ['C=U', 'x'])
-        bad_params = ['C=R', 'D=R', 'L=R', '', '']
+        bad_params = ['C=R', 'C=Ur', 'D=R', 'L=R', '', '']
         for bad_param in bad_params:
             with pytest.raises(ParameterBadFormatError):
                 c = Command(verb_str, [bad_param])
@@ -86,7 +86,7 @@ class TestCommand:
             c = Command(verb_str, [])
         with pytest.raises(ParametersCountError):
             c = Command(verb_str, ['x', 'y'])
-        bad_params = ['S=any', 'U=any']
+        bad_params = ['S=3600r', 'S=any', 'U=any']
         for bad_param in bad_params:
             with pytest.raises(ParameterBadFormatError):
                 c = Command(verb_str, [bad_param])
@@ -102,8 +102,8 @@ class TestCommand:
             c = Command(verb_str, [])
         with pytest.raises(ParameterBadFormatError):
             c = Command(verb_str, ['L=N', 'y'])
-        params = [('HD=123', 'data'), ('ET=123', 'data'), ('', 'data')]
-        for param in params:
+        good_params = [('HD=123', 'data'), ('ET=123', 'data'), ('', 'data')]
+        for param in good_params:
             c = Command(verb=verb_str, parameters=[param[0], param[1]])
             assert c.verb == verb_str
             assert c.parameters == [param[0], param[1]]

@@ -9,15 +9,15 @@ verbs_params = {
     'GN': _standard_command,
     'GP': [r'^(\?|\d|10)$'],
     'GS': _standard_command,
-    'MM': [r'^(C=(U|\*))|(D=(\d+|R|\*))|(M=(\d+|\*))|(N=(D|E|\?))|(R=(\d+|O|N))$',
+    'MM': [r'^(C=(U|\*)$)|(D=(\d+|R|\*)$)|(M=(\d+|\*)$)|(N=(D|E|\?)$)|(R=(\d+|O|N)$)',
            ],
-    'MT': [r'^(C=U)|(D=(\d+|U))|(L=(\d+|U))$'],
+    'MT': [r'^(C=U$)|(D=(\d+|U)$)|(L=(\d+|U)$)'],
     'PO': _no_params,
     'PW': _standard_command,
     'RS': _no_params,
     'RT': _standard_command,
-    'SL': [r'^(S=\d+)|(U=[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2})$'],
-    'TD': [r'^$|(HD=\d+)|(ET=\d+)$', r'^.*$']
+    'SL': [r'^(S=\d+$)|(U=[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}$)'],
+    'TD': [r'^$|(HD=\d+$)|(ET=\d+$)', r'^.*$']
 }
 
 _verbs_re_or = '|'.join(verbs_params.keys())
