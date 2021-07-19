@@ -52,12 +52,12 @@ class ChecksumCalculator:
         return hex_checksum[2:].zfill(2)
 
 
-class CommandMessage(ChecksumCalculator):
+class NMEAMessageComposer(ChecksumCalculator):
     def __str__(self):
         return f'${self.sentence}*{self.checksum}'
 
 
-class ResponseMessage(ChecksumCalculator):
+class NMEAMessageChecker(ChecksumCalculator):
     def __init__(self, sentence, received_checksum):
         super().__init__(sentence)
         self.received_checksum = received_checksum

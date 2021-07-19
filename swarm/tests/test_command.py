@@ -125,8 +125,8 @@ class TestCommand:
         c = Command(verb='DT', parameters=[300])
         assert c.sentence == 'DT 300'
 
-    def test_nmea_sentence(self):
+    def test_nmea_message(self):
         c = Command(verb='CS')
-        assert c.nmea_sentence == '$CS*10'
+        assert c.nmea_message == '$CS*10'
         c = Command(verb='DT', parameters=[300])
-        assert c.nmea_sentence == '$DT 300*03'
+        assert c.nmea_message == '$DT 300*03'

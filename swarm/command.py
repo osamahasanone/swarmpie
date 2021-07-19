@@ -1,5 +1,5 @@
 import re
-from .nmea import CommandMessage
+from .nmea import NMEAMessageComposer
 from .constatnts import verbs_params
 
 
@@ -61,11 +61,10 @@ class Command:
         return f'{self.verb} {self.parameters_str}' if self.parameters else self.verb
 
     @property
-    def nmea_sentence(self):
+    def nmea_message(self):
         '''compose nmea message
 
         returns:
 
         string of the format '$sentence*checksum' '''
-        message = CommandMessage(self.sentence)
-        return str(message)
+        return str(NMEAMessageComposer(self.sentence))
