@@ -52,6 +52,23 @@ class ChecksumCalculator:
         return hex_checksum[2:].zfill(2)
 
 
-class Message(ChecksumCalculator):
+class RequestMessage(ChecksumCalculator):
     def __str__(self):
         return f'${self.sentence}*{self.checksum}'
+
+
+class ResponseMessage(ChecksumCalculator):
+    def __init__(self, sentence, received_checksum):
+        super().__init__(sentence)
+        self.received_checksum = received_checksum
+
+    @property
+    def received_checksum(self):
+        return self.__received_checksum
+
+    @received_checksum.setter
+    def received_checksum(self, value):
+        self.__received_checksum = value
+
+    def is_valid(self):
+        return self.checksum == self.received_checksum

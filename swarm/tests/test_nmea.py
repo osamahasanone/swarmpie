@@ -1,5 +1,5 @@
 import pytest
-from ..nmea import ChecksumCalculator, Message
+from ..nmea import ChecksumCalculator, RequestMessage, ResponseMessage
 
 
 class TestChecksumCalculator:
@@ -24,11 +24,21 @@ class TestChecksumCalculator:
         return checksum_calc.checksum == '03'
 
 
-class TestMessage:
+class TestRequestMessage:
 
     @pytest.fixture
     def message(self):
-        return Message(sentence='DT 300')
+        return RequestMessage(sentence='DT 300')
 
     def test_str(self, message):
         assert str(message) == '$DT 300*03'
+
+
+class TestResponseMessage:
+
+    @pytest.fixture
+    def message(self):
+        return ResponseMessage(sentence='DT 300', received_checksum='03')
+
+    def test_is_valid(self, message):
+        assert message.is_valid() == True
