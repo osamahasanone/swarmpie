@@ -1,6 +1,7 @@
 import re
 from .nmea import NMEAMessageChecker
 from .constatnts import response_pattern
+from .errors.response_errors import *
 
 
 class Response:
@@ -16,12 +17,12 @@ class Response:
     @nmea_message.setter
     def nmea_message(self, value):
         if not re.match(response_pattern, value):
-            raise ValueError(f'Received NMEA message is not well formatted')
-        res_message = NMEAMessageChecker(
-            sentence=value[1:-3], received_checksum=value[-2:])
+            raise NMEAMessageBadFormatError(value)
+        sentence = value[1:-3]
+        received_checksum = value[-2:]
+        res_message = NMEAMessageChecker(sentence, received_checksum)
         if not res_message.is_valid():
-            raise ValueError(
-                f'checksum of received NMEA message is incorrect !!')
+            raise ChecksumError(sentence, received_checksum)
 
         self.__nmea_message = value
 

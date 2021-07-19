@@ -1,17 +1,18 @@
 import pytest
 from ..command import Command
+from ..errors.command_errors import *
 
 
 class TestCommand:
 
     def test_unknown_verb(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(UnkownVerbError):
             c = Command(verb='XX', parameters=[])
 
     def test_create_no_param_command(self):
         no_params_verbs = ['CS', 'FV', 'PO', 'RS']
         for verb in no_params_verbs:
-            with pytest.raises(ValueError):
+            with pytest.raises(ParametersCountError):
                 c = Command(verb, ['?'])
             c = Command(verb=verb)
             assert c.verb == verb
@@ -20,11 +21,11 @@ class TestCommand:
     def test_create_standard_command(self):
         standard_verbs = ['DT', 'GJ', 'GN', 'GS', 'PW', 'RT']
         for verb in standard_verbs:
-            with pytest.raises(ValueError):
+            with pytest.raises(ParametersCountError):
                 c = Command(verb, [])
-            with pytest.raises(ValueError):
+            with pytest.raises(ParameterBadFormatError):
                 c = Command(verb, ['x'])
-            with pytest.raises(ValueError):
+            with pytest.raises(ParametersCountError):
                 c = Command(verb, ['?', 'x'])
             c = Command(verb=verb, parameters=[300])
             assert c.verb == verb
@@ -32,11 +33,11 @@ class TestCommand:
 
     def test_create_gp(self):
         verb_str = 'GP'
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, [])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParameterBadFormatError):
             c = Command(verb_str, ['@'])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParameterBadFormatError):
             c = Command(verb_str, [11])
         c = Command(verb=verb_str, parameters=['?'])
         assert c.verb == verb_str
@@ -48,66 +49,58 @@ class TestCommand:
 
     def test_create_mm(self):
         verb_str = 'MM'
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, [])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['C=R'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['D=U'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['M=U'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['N=U'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['R=U'])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, ['C=U', 'x'])
-        params = ['C=U', 'C=*', 'D=123', 'D=R', 'D=*', 'M=123',
-                  'M=*', 'N=D', 'N=E', 'N=?', 'R=123', 'R=O', 'R=N']
-        for param in params:
+        bad_params = ['C=R', 'D=U', 'M=U', 'N=U']
+        for bad_param in bad_params:
+            with pytest.raises(ParameterBadFormatError):
+                c = Command(verb_str, [bad_param])
+        good_params = ['C=U', 'C=*', 'D=123', 'D=R', 'D=*', 'M=123',
+                       'M=*', 'N=D', 'N=E', 'N=?', 'R=123', 'R=O', 'R=N']
+        for param in good_params:
             c = Command(verb=verb_str, parameters=[param])
             assert c.verb == verb_str
             assert c.parameters == [param]
 
     def test_create_mt(self):
         verb_str = 'MT'
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, [])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['C=R'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['D=R'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['L=R'])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, ['C=U', 'x'])
-        params = ['C=U', 'D=123', 'D=U', 'L=123', 'L=U']
-        for param in params:
+        bad_params = ['C=R', 'D=R', 'L=R', '', '']
+        for bad_param in bad_params:
+            with pytest.raises(ParameterBadFormatError):
+                c = Command(verb_str, [bad_param])
+        good_params = ['C=U', 'D=123', 'D=U', 'L=123', 'L=U']
+        for param in good_params:
             c = Command(verb=verb_str, parameters=[param])
             assert c.verb == verb_str
             assert c.parameters == [param]
 
     def test_create_sl(self):
         verb_str = 'SL'
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, [])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['S=any'])
-        with pytest.raises(ValueError):
-            c = Command(verb_str, ['U=any'])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, ['x', 'y'])
-        params = ['S=3600', 'U=2021-10-01 16:57:55']
-        for param in params:
+        bad_params = ['S=any', 'U=any']
+        for bad_param in bad_params:
+            with pytest.raises(ParameterBadFormatError):
+                c = Command(verb_str, [bad_param])
+        good_params = ['S=3600', 'U=2021-10-01 16:57:55']
+        for param in good_params:
             c = Command(verb=verb_str, parameters=[param])
             assert c.verb == verb_str
             assert c.parameters == [param]
 
     def test_create_td(self):
         verb_str = 'TD'
-        with pytest.raises(ValueError):
+        with pytest.raises(ParametersCountError):
             c = Command(verb_str, [])
-        with pytest.raises(ValueError):
+        with pytest.raises(ParameterBadFormatError):
             c = Command(verb_str, ['L=N', 'y'])
         params = [('HD=123', 'data'), ('ET=123', 'data'), ('', 'data')]
         for param in params:

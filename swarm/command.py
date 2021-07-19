@@ -1,6 +1,7 @@
 import re
 from .nmea import NMEAMessageComposer
 from .constatnts import verbs_params
+from .errors.command_errors import *
 
 
 class Command:
@@ -24,7 +25,7 @@ class Command:
     @verb.setter
     def verb(self, value):
         if value not in verbs_params:
-            raise ValueError(f'Unknow command verb {value}')
+            raise UnkownVerbError(value)
         self.__verb = value
 
     @property
@@ -35,11 +36,15 @@ class Command:
     def parameters(self, values):
         str_values = [str(value) for value in values]
         verb_patterns = verbs_params.get(self.verb)
-        if len(verb_patterns) != len(str_values):
-            raise ValueError(
-                f'{self.verb} command should have {len(verb_patterns)} parameter(s)')
-        if not all(re.match(verb_patterns[i], str_values[i]) for i in range(len(verb_patterns))):
-            raise ValueError(f'One of the parameters is not well formatted')
+        params_count = len(str_values)
+        target_params_count = len(verb_patterns)
+        if params_count != target_params_count:
+            raise ParametersCountError(
+                self.verb, params_count, target_params_count)
+        for i in range(len(verb_patterns)):
+            param = str_values[i]
+            if not re.match(verb_patterns[i], param):
+                raise ParameterBadFormatError(self.verb, param)
         self.__parameters = str_values
 
     @property

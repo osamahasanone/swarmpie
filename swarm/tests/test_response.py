@@ -1,15 +1,17 @@
+from swarm.nmea import ChecksumCalculator
 import pytest
 from ..response import Response
+from ..errors.response_errors import *
 
 
 class TestResponse:
 
     def test_unknown_verb(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(NMEAMessageBadFormatError):
             r = Response('$XX 300*7f')
 
     def test_falsy_checksum(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(ChecksumError):
             r = Response('$DT 300*0f')
 
     @pytest.fixture
