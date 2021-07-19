@@ -52,7 +52,7 @@ class ChecksumCalculator:
         return hex_checksum[2:].zfill(2)
 
 
-class RequestMessage(ChecksumCalculator):
+class CommandMessage(ChecksumCalculator):
     def __str__(self):
         return f'${self.sentence}*{self.checksum}'
 

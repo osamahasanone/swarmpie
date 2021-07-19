@@ -1,5 +1,5 @@
 import re
-from ..nmea import RequestMessage
+from ..nmea import CommandMessage
 from .validation import verbs_params
 
 
@@ -67,5 +67,5 @@ class Command:
         returns:
 
         string of the format '$sentence*checksum' '''
-        message = RequestMessage(self.sentence)
+        message = CommandMessage(self.sentence)
         return str(message)
