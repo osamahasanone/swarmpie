@@ -53,11 +53,15 @@ class ChecksumCalculator:
 
 
 class NMEAMessageComposer(ChecksumCalculator):
+    '''compose NMEA message. to be used with commands'''
+
     def __str__(self):
         return f'${self.sentence}*{self.checksum}'
 
 
 class NMEAMessageChecker(ChecksumCalculator):
+    '''check if the NMEA message is valid.. to be used with responses'''
+
     def __init__(self, sentence, received_checksum):
         super().__init__(sentence)
         self.received_checksum = received_checksum
@@ -71,4 +75,5 @@ class NMEAMessageChecker(ChecksumCalculator):
         self.__received_checksum = value
 
     def is_valid(self):
+        '''check if received checksum is correct'''
         return self.checksum == self.received_checksum

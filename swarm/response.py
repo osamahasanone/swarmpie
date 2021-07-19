@@ -4,6 +4,8 @@ from .constatnts import response_pattern
 
 
 class Response:
+    '''Parse Response NMEA message'''
+
     def __init__(self, nmea_message):
         self.nmea_message = nmea_message
 
@@ -25,16 +27,20 @@ class Response:
 
     @property
     def sentence(self):
+        '''everything between $ and *xx'''
         return self.nmea_message[1:-3]
 
     @property
     def verb(self):
+        '''swarm verb like FV,DT..'''
         return self.sentence.split(' ')[0]
 
     @property
     def parameters(self):
+        '''response parameters list'''
         return self.sentence.split(' ')[1].split(',')
 
     @property
     def checksum(self):
+        '''received checksum'''
         return self.nmea_message[-2:]
