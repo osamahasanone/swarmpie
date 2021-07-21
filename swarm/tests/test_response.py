@@ -6,13 +6,20 @@ from ..errors.response_errors import *
 
 class TestResponse:
 
-    def test_unknown_verb(self):
+    @pytest.mark.parametrize('message', ['$XX 300*7f', '$CS30*2a', '$CS30*2A'])
+    def test_bad_format(self, message):
         with pytest.raises(NMEAMessageBadFormatError):
-            r = Response('$XX 300*7f')
+            r = Response(message)
 
-    def test_falsy_checksum(self):
+    @pytest.mark.parametrize('falsy_checksum_response', ['$GN 15*20', '$DT 300*0f'])
+    def test_falsy_checksum(self, falsy_checksum_response):
         with pytest.raises(ChecksumError):
-            r = Response('$DT 300*0f')
+            r = Response(falsy_checksum_response)
+
+    @pytest.mark.parametrize('checksum_response', ['$GN 30*2d', '$GN 30*2D'])
+    def test_true_checksum(self, checksum_response):
+        with pytest.raises(ChecksumError):
+            r = Response(checksum_response)
 
     @pytest.fixture
     def true_response(self):
