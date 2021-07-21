@@ -24,9 +24,10 @@ class Command:
 
     @verb.setter
     def verb(self, value):
-        if value not in verbs_params:
-            raise UnkownVerbError(value)
-        self.__verb = value
+        value_upper = value.upper()
+        if value_upper not in verbs_params:
+            raise UnkownVerbError(value_upper)
+        self.__verb = value_upper
 
     @property
     def parameters(self):
