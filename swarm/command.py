@@ -24,7 +24,7 @@ class Command:
 
     @verb.setter
     def verb(self, value):
-        value_upper = value.upper()
+        value_upper = value if not value else value.upper()
         if value_upper not in verbs_params:
             raise UnkownVerbError(value_upper)
         self.__verb = value_upper
