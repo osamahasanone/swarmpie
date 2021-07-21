@@ -21,4 +21,4 @@ verbs_params = {
 }
 
 _verbs_re_or = '|'.join(verbs_params.keys())
-response_pattern = fr'^\$({_verbs_re_or}) .*\*[0-9a-f][0-9a-f]$'
+response_pattern = fr'^\$({_verbs_re_or}) .*\*[0-9a-fA-F][0-9a-fA-F]$'
