@@ -19,7 +19,7 @@ class Response:
         if not re.match(response_pattern, value):
             raise NMEAMessageBadFormatError(value)
         sentence = value[1:-3]
-        received_checksum = value[-2:]
+        received_checksum = value[-2:].lower()
         res_message = NMEAMessageChecker(sentence, received_checksum)
         if not res_message.is_valid():
             raise ChecksumError(sentence, received_checksum)
@@ -44,4 +44,4 @@ class Response:
     @property
     def checksum(self):
         '''received checksum'''
-        return self.nmea_message[-2:]
+        return self.nmea_message[-2:].lower()
