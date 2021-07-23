@@ -4,11 +4,13 @@
 
 - connect to 4G hotspot
 - sudo apt update
+- sudo apt install code
 - sudo apt install git
 - git --version
 - git config --global user.name ''
 - git config --global user.email ''
 - git config --global core.autocrlf input
+- git config --global core.editor 'code --wait'
 - git clone https://github.com/osamahasanone/swarmpie.git
 - sudo pip3 install pipenv
 - cd repo
