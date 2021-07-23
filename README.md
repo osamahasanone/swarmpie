@@ -1,6 +1,6 @@
 # swarmpie
 
-## Setup Raspberry Pi 4
+## Setup Raspberry Model 4B V1.2 - 4G RAM
 
 - connect to 4G hotspot
 - sudo apt update
