@@ -22,4 +22,4 @@ class UART:
 
     def receive_line(self):
         '''receive one line from port and get the decoded striped message it includes'''
-        return self._parse_line(self.self.__connection.readline())
+        return self._parse_line(self.__connection.readline())
