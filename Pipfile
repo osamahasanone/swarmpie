@@ -7,6 +7,7 @@ name = "pypi"
 numpy = "*"
 pytest = "*"
 pyserial = "*"
+django = "*"
 
 [dev-packages]
 
