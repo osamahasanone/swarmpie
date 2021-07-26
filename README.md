@@ -19,3 +19,13 @@
 - pipenv install numpy==1.21.1
 - pipenv install pyserial==3.5
 - pipenv install pytest==6.2.4
+
+## Enable UART interface
+1- sudo raspi-config
+2- interfacing options
+3- p6 serial
+4- Would you like a login shell to be accessable over serial?
+    NO
+5- Would you like the serial port hardware to be enabled?
+    YES
+6- Reboot
