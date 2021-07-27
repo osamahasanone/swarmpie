@@ -3,7 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class VerbParameter(models.Model):
-    verb = models.ForeignKey('common.Verb', on_delete=models.PROTECT)
+    verb = models.ForeignKey(
+        'common.Verb', on_delete=models.PROTECT, related_name='parameters')
     order = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(2)])
 

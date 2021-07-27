@@ -8,6 +8,7 @@ numpy = "*"
 pytest = "*"
 pyserial = "*"
 django = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
