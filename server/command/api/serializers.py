@@ -14,3 +14,17 @@ class VerbParameterSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerbParameter
         fields = ('id', 'order', 'choices')
+
+
+class CommandParameterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommandParameter
+        fields = ('id', 'command', 'verb_parameter', 'value')
+
+
+class CommandSerializer(serializers.ModelSerializer):
+    parameters = CommandParameterSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = VerbParameter
+        fields = ('id', 'verb', 'ts', 'parameters')

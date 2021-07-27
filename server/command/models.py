@@ -37,7 +37,8 @@ class Command(models.Model):
 
 
 class CommandParameter(models.Model):
-    command = models.ForeignKey('Command', on_delete=models.PROTECT)
+    command = models.ForeignKey(
+        'Command', on_delete=models.PROTECT, related_name='parameters')
     verb_parameter = models.ForeignKey(
         'VerbParameter', on_delete=models.PROTECT)
     value = models.CharField(max_length=8000)
