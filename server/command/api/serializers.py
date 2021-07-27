@@ -26,5 +26,5 @@ class CommandSerializer(serializers.ModelSerializer):
     parameters = CommandParameterSerializer(many=True, read_only=True)
 
     class Meta:
-        model = VerbParameter
+        model = Command
         fields = ('id', 'verb', 'ts', 'parameters')

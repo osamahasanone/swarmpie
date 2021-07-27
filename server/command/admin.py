@@ -15,7 +15,7 @@ class VerbParameterChoiceAdmin(admin.ModelAdmin):
 
 
 class CommandAdmin(admin.ModelAdmin):
-    fields = ('verb',)
+    fields = ('verb', 'ts')
     list_display = ('id', 'verb', 'ts')
     ordering = ['id']
 
