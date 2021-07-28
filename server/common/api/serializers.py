@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from common.models import *
-from command.api.serializers import VerbParameterSerializer
+from command.api.serializers import VerbParameterSerializerResponse
 
 
-class VerbSerializer(serializers.ModelSerializer):
-    parameters = VerbParameterSerializer(many=True, read_only=True)
+class VerbSerializerResponse(serializers.ModelSerializer):
+    parameters = VerbParameterSerializerResponse(many=True, read_only=True)
 
     class Meta:
         model = Verb

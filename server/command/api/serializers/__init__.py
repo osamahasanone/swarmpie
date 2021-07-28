@@ -1,4 +1,4 @@
-from .command_parameter import CommandParameterSerializer, CommandParameterPostSerializer
-from .command import CommandSerializer, CommandPostSerializer
-from .verb_parameter import VerbParameterSerializer
-from .verb_parameter_choice import VerbParameterChoiceSerializer
+from .command_parameter import CommandParameterSerializerResponse, CommandParameterSerializerRequest
+from .command import CommandSerializerResponse, CommandSerializerRequest
+from .verb_parameter_choice import VerbParameterChoiceSerializerResponse
+from .verb_parameter import VerbParameterSerializerResponse

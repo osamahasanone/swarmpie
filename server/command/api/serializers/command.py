@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from command.models import Command, CommandParameter
-from . import CommandParameterSerializer, CommandParameterPostSerializer
+from . import CommandParameterSerializerResponse, CommandParameterSerializerRequest
 
 
-class CommandSerializer(serializers.ModelSerializer):
-    parameters = CommandParameterSerializer(many=True, read_only=True)
+class CommandSerializerResponse(serializers.ModelSerializer):
+    parameters = CommandParameterSerializerResponse(many=True, read_only=True)
 
     class Meta:
         model = Command
@@ -12,8 +12,8 @@ class CommandSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-class CommandPostSerializer(serializers.ModelSerializer):
-    parameters = CommandParameterPostSerializer(many=True)
+class CommandSerializerRequest(serializers.ModelSerializer):
+    parameters = CommandParameterSerializerRequest(many=True)
 
     class Meta:
         model = Command
