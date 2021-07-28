@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from common.models import *
+from common.models import Verb
 from command.api.serializers import VerbParameterSerializerResponse
 
 

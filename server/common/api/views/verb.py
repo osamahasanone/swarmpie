@@ -1,5 +1,5 @@
 from common.models import Verb
-from .serializers import VerbSerializerResponse
+from ..serializers import VerbSerializerResponse
 from rest_framework import generics
 
 
