@@ -7,6 +7,7 @@ urlpatterns = [
     path('command_parameters', CommandParameterList.as_view(),
          name='command_parameters_list'),
     path('commands', CommandList.as_view(), name='commands_list'),
+    path('commands/create', CommandCreate.as_view(), name='command_create'),
     path('commands/<int:pk>', CommandDetail.as_view(),
          name='command_retrieve'),
 ]

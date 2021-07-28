@@ -1,5 +1,5 @@
 from command.models import VerbParameter, CommandParameter, Command
-from .serializers import VerbParameterSerializer, CommandParameterSerializer, CommandSerializer
+from .serializers import *
 from rest_framework import generics
 
 
@@ -16,6 +16,11 @@ class CommandParameterList(generics.ListAPIView):
 class CommandList(generics.ListAPIView):
     queryset = Command.objects.all()
     serializer_class = CommandSerializer
+
+
+class CommandCreate(generics.CreateAPIView):
+    queryset = Command.objects.all()
+    serializer_class = CommandPostSerializer
 
 
 class CommandDetail(generics.RetrieveAPIView):
