@@ -1,16 +1,6 @@
-from command.models import VerbParameter, CommandParameter, Command
-from .serializers import *
+from command.models import *
+from ..serializers import *
 from rest_framework import generics
-
-
-class VerbParameterList(generics.ListAPIView):
-    queryset = VerbParameter.objects.all()
-    serializer_class = VerbParameterChoiceSerializerResponse
-
-
-class CommandParameterList(generics.ListAPIView):
-    queryset = CommandParameter.objects.all()
-    serializer_class = CommandParameterSerializerResponse
 
 
 class CommandList(generics.ListAPIView):
