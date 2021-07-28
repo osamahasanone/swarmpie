@@ -1,5 +1,5 @@
-from command.models import *
-from ..serializers import *
+from command.models import VerbParameter
+from ..serializers import VerbParameterChoiceSerializerResponse
 from rest_framework import generics
 
 

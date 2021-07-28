@@ -1,5 +1,5 @@
-from command.models import *
-from ..serializers import *
+from command.models import Command
+from ..serializers import CommandSerializerResponse, CommandSerializerRequest
 from rest_framework import generics
 
 
