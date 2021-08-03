@@ -1,5 +1,8 @@
-from django.urls import path, include
+from django.urls import path
+from .views import *
 
 urlpatterns = [
-    path('api/', include('common.api.urls'))
+    path('verbs', VerbList.as_view(), name='verbs_list'),
+    path('verbs/<int:pk>', VerbDetail.as_view(),
+         name='verb_retrieve'),
 ]

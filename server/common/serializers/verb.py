@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from common.models import Verb
-from command.api.serializers import VerbParameterSerializerResponse
+from command.serializers import VerbParameterSerializerResponse
 
 
 class VerbSerializerResponse(serializers.ModelSerializer):
