@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class ResponseParameter(models.Model):
     response = models.ForeignKey(
         'Response', on_delete=models.PROTECT, related_name='parameters')
