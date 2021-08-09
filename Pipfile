@@ -9,6 +9,7 @@ pytest = "*"
 pyserial = "*"
 django = "*"
 djangorestframework = "*"
+drf-yasg = "*"
 
 [dev-packages]
 
