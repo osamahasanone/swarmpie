@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./commandSend.css";
 import "antd/dist/antd.css";
 import { Row, Col, Select, Input, InputNumber, Typography } from "antd";
 import ItemDescription from "../common/itemDescription";
@@ -19,7 +18,7 @@ class SelectParameterChoice extends Component {
       <Select
         showSearch
         size="large"
-        className="Parameter-Input"
+        className="d-block"
         placeholder="Select a Choice"
         optionFilterProp="value"
         onChange={this.props.onChange}
@@ -76,7 +75,7 @@ class CommandParameter extends Component {
     if (this.state.free_value_type === "rate")
       return (
         <InputNumber
-          className="Parameter-Input"
+          style={{ width: "100%" }}
           onChange={this.onFreeInputChange}
           placeholder="Please enter the rate"
           size="large"
@@ -87,7 +86,7 @@ class CommandParameter extends Component {
     else if (this.state.free_value_type === "seconds")
       return (
         <InputNumber
-          className="Parameter-Input"
+          style={{ width: "100%" }}
           onChange={this.onFreeInputChange}
           placeholder="Please enter the seconds"
           size="large"
@@ -98,7 +97,7 @@ class CommandParameter extends Component {
     else if (this.state.free_value_type === "msg_id")
       return (
         <InputNumber
-          className="Parameter-Input"
+          style={{ width: "100%" }}
           onChange={this.onFreeInputChange}
           placeholder="Please enter Message ID"
           size="large"
@@ -109,7 +108,7 @@ class CommandParameter extends Component {
     else if (this.state.free_value_type === "free_text")
       return (
         <Input
-          className="Parameter-Input"
+          style={{ width: "100%" }}
           onChange={this.onFreeInputChange}
           placeholder="Please enter the Data"
           size="large"
@@ -119,10 +118,13 @@ class CommandParameter extends Component {
 
   render() {
     return (
-      <div className="parameter">
+      <div className="mt-3">
         <Row gutter={16}>
-          <Col className="gutter-row" span={6}>
-            <Text strong className="Text">
+          <Col className="gutter-row" span={8}>
+            <Text
+              strong
+              className="d-block p-2 bg-primary text-white opacity-75"
+            >
               Parameter {this.props.parameter.order}
             </Text>
             <SelectParameterChoice
@@ -133,7 +135,7 @@ class CommandParameter extends Component {
         </Row>
         {this.state.free_value_type && (
           <Row gutter={16}>
-            <Col className="gutter-row" span={6}>
+            <Col className="gutter-row" span={8}>
               {this.renderFreeInput()}
             </Col>
           </Row>

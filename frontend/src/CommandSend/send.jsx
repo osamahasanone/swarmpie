@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "./commandSend.css";
 import "antd/dist/antd.css";
-import { Row, Col, Button } from "antd";
+import { Row, Col, message, Button } from "antd";
 import { ThunderboltOutlined } from "@ant-design/icons";
 import SelectVerb from "./selectVerb";
 import CommandParameters from "./commandParameters";
@@ -46,12 +45,35 @@ class CommandSend extends Component {
     this.setState({ commandParameters });
   };
 
-  render() {
+  shouldDisableGo = () => {
+    const commandVerb = this.state.commandVerb;
+    if (commandVerb) {
+      return (
+        this.state.commandParameters.length !== commandVerb.parameters.length
+      );
+    }
+    return true;
+  };
+
+  onGoClick = async () => {
     console.log(this.state.commandVerb);
     console.log(this.state.commandParameters);
+    await fetch("http://127.0.0.1:8000/commands/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        verb: this.state.commandVerb.id,
+        parameters: this.state.commandParameters,
+      }),
+    })
+      .then((response) => response.json())
+      .then((res_json) => message.success(res_json.id));
+  };
+
+  render() {
     return (
       <React.Fragment>
-        <Row className="group" gutter={16}>
+        <Row gutter={16}>
           <Col className="gutter-row" span={8}>
             <SelectVerb verbs={this.state.verbs} onChange={this.onVerbChange} />
           </Col>
@@ -64,9 +86,14 @@ class CommandSend extends Component {
           />
         )}
 
-        <Row className="group" gutter={16}>
+        <Row className="mt-3" gutter={16}>
           <Col className="gutter-row" span={8}>
-            <Button type="primary" style={{ width: 300 }}>
+            <Button
+              style={{ width: "100%" }}
+              type="primary"
+              onClick={this.onGoClick}
+              disabled={this.shouldDisableGo()}
+            >
               GO
               <ThunderboltOutlined />
             </Button>

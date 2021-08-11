@@ -9,13 +9,13 @@ class SelectVerb extends Component {
   render() {
     return (
       <div>
-        <Text strong className="Text">
-          Select Verb
+        <Text strong className="d-block p-2 bg-primary text-white">
+          Verb
         </Text>
         <Select
           showSearch
           size="large"
-          className="Parameter-Input"
+          className="d-block"
           placeholder="Select a verb"
           optionFilterProp="value"
           onChange={this.props.onChange}

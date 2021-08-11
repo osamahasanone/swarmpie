@@ -17,7 +17,7 @@ class CommandSerializerRequest(serializers.ModelSerializer):
 
     class Meta:
         model = Command
-        fields = ('id', 'verb', 'ts', 'parameters')
+        fields = ('id', 'verb', 'parameters')
 
     def create(self, validated_data):
         parameters_data = validated_data.pop('parameters')
